@@ -9,15 +9,15 @@ var fs = require('fs');
 var projectName;
 var program = new commander.Command(packageJson.name)
     .version('0.1.0')
-    .arguments('<name-project>')
-    .usage('<name-project>')
+    .arguments('<project-directory>')
+    .usage("" + chalk.green('<project-directory>'))
     .action(function (name) {
     projectName = name;
 })
     .parse(process.argv);
 if (typeof projectName === 'undefined') {
-    console.error('Please specify name project:');
-    console.log("  " + chalk.cyan(program.name()) + " " + chalk.green('<name-project>'));
+    console.error('Please specify the project directory:');
+    console.log("  " + chalk.cyan(program.name()) + " " + chalk.green('<project-directory>'));
     console.log();
     console.log('For example:');
     console.log("  " + chalk.cyan(program.name()) + " " + chalk.green('my-webpack-app'));
@@ -66,12 +66,13 @@ function installPackages(dependency) {
         shell: true
     };
     console.log();
-    console.log('Installed packages for App');
+    console.log('Installing packages for your application');
     var child = spawn(command, args, config);
     child.on('close', function () {
         console.log();
         console.log("Project " + chalk.green(projectName) + " created!");
         console.log("    use: cd " + chalk.green(projectName) + " and " + chalk.green('npm start'));
+        console.log("    Then open browser view in then " + chalk.cyan('http://localhost:8080/'));
     });
 }
 function validationAppName(appName) {
@@ -79,14 +80,15 @@ function validationAppName(appName) {
     var dependency = ['webpack', 'webpack-dev-server'];
     if (!results.validForNewPackages) {
         console.error("Could not create project named: " + chalk.red(appName));
-        console.log();
+        console.log('please correct:');
         results.errors.forEach(function (error) {
             console.log("    " + chalk.red('*') + " " + error);
         });
         process.exit(1);
     }
     if (dependency.indexOf(appName) !== -1) {
-        console.error("Could not create project named " + chalk.red(appName));
+        console.error("Could not create project named " + chalk.red(appName) + ".");
+        console.error('Please change the name of the application, a dependency has the same name.');
         process.exit(1);
     }
 }
