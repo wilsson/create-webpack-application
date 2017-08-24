@@ -4,6 +4,8 @@
 
 :rocket: Easily create a basic webpack application.
 
+<img src="https://raw.githubusercontent.com/wilsson/create-webpack-app/master/images/browser.png">
+
 ## Getting Started
 
 ### Installation
