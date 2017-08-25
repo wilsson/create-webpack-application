@@ -31,6 +31,7 @@ Will also install its dependencies.
 my-app
 ├── node_modules
 ├── package.json
+├── .gitignore
 ├── public
 │   └── index.html
 └── src
