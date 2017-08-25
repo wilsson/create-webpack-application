@@ -54,6 +54,7 @@ function createApp(name: string): void {
     );
 
     let pathConfig = path.resolve(__dirname, '../templates/config/webpack.config.js');
+    let pathConfigIngnore = path.resolve(__dirname, '../templates/config/.gitignore');
     let pathHtml = path.resolve(__dirname, '../templates/public/index.html');
     let pathEntry = path.resolve(__dirname, '../templates/src/entry.js');
 
@@ -62,6 +63,9 @@ function createApp(name: string): void {
 
     let webpackconfig = fs.readFileSync(pathConfig, 'utf-8');
     fs.writeFileSync(root + '/webpack.config.js', webpackconfig);
+
+    let gitignore = fs.readFileSync(pathConfigIngnore, 'utf-8');
+    fs.writeFileSync(root + '/.gitignore', gitignore);
 
     let html = fs.readFileSync(pathHtml, 'utf-8');
     fs.writeFileSync(public + '/index.html', html);

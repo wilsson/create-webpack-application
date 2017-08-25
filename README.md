@@ -4,7 +4,7 @@
 
 :rocket: Easily create a basic webpack application.
 
-<img src="https://raw.githubusercontent.com/wilsson/create-webpack-app/master/images/browser.png">
+<img src="https://raw.githubusercontent.com/wilsson/create-webpack-application/master/images/browser.png">
 
 ## Getting Started
 
@@ -13,13 +13,13 @@
 Install globall.y
 
 ```bash
-npm install -g create-webpack-app
+npm install -g create-webpack-application
 ```
 
 ### Create app
 
 ```bash
-create-webpack-app my-app
+create-webpack-application my-app
 cd my-app
 ```
 
