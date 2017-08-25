@@ -43,7 +43,7 @@ function createApp(name) {
     fs.mkdirSync(src);
     fs.writeFileSync(path.join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
     var pathConfig = path.resolve(__dirname, '../templates/config/webpack.config.js');
-    var pathConfigIngnore = path.resolve(__dirname, '../templates/config/.gitignore');
+    var pathConfigIngnore = path.resolve(__dirname, '../templates/config/git-ignore');
     var pathHtml = path.resolve(__dirname, '../templates/public/index.html');
     var pathEntry = path.resolve(__dirname, '../templates/src/entry.js');
     var entry = fs.readFileSync(pathEntry, 'utf-8');

@@ -54,7 +54,7 @@ function createApp(name: string): void {
     );
 
     let pathConfig = path.resolve(__dirname, '../templates/config/webpack.config.js');
-    let pathConfigIngnore = path.resolve(__dirname, '../templates/config/.gitignore');
+    let pathConfigIngnore = path.resolve(__dirname, '../templates/config/git-ignore');
     let pathHtml = path.resolve(__dirname, '../templates/public/index.html');
     let pathEntry = path.resolve(__dirname, '../templates/src/entry.js');
 
