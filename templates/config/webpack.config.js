@@ -13,6 +13,7 @@ module.exports = {
     devtool: 'source-map',
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),
+        publicPath: "/dist/",
         watchContentBase: true
     }
 }

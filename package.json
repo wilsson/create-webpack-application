@@ -6,7 +6,7 @@
     "create-webpack-application": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc -w"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -15,8 +15,8 @@
   "author": "wilsson <wilsonft83@gmail.com>",
   "license": "MIT",
   "keywords": [
-      "webpack",
-      "app"
+    "webpack",
+    "app"
   ],
   "homepage": "https://github.com/wilsson/create-webpack-application#readme",
   "dependencies": {
