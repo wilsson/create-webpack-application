@@ -40,7 +40,7 @@ function createApp(name: string): void {
         version: '0.1.0',
         scripts:{
             start: 'webpack-dev-server',
-            build: 'webpack'
+            build: 'webpack --mode development'
         }
     };
 
@@ -71,7 +71,7 @@ function createApp(name: string): void {
     fs.writeFileSync(public + '/index.html', html);
 
     process.chdir(root);
-    let dependency = ['webpack', 'webpack-dev-server'];
+    let dependency = ['webpack','webpack-cli', 'webpack-dev-server'];
     installPackages(dependency);
 }
 

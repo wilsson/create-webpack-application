@@ -35,7 +35,7 @@ function createApp(name) {
         version: '0.1.0',
         scripts: {
             start: 'webpack-dev-server',
-            build: 'webpack'
+            build: 'webpack --mode development'
         }
     };
     fs.mkdirSync(root);
@@ -55,7 +55,7 @@ function createApp(name) {
     var html = fs.readFileSync(pathHtml, 'utf-8');
     fs.writeFileSync(public + '/index.html', html);
     process.chdir(root);
-    var dependency = ['webpack', 'webpack-dev-server'];
+    var dependency = ['webpack', 'webpack-cli', 'webpack-dev-server'];
     installPackages(dependency);
 }
 function installPackages(dependency) {
