@@ -1,0 +1,12 @@
+{
+    "name": "urb",
+    "version": "0.1.0",
+    "scripts":{
+        "start": "webpack-dev-server",
+        "build": "webpack --mode development"
+    },
+    "dependencies": {
+        "react":"latest",
+        "react-dom": "latest"
+    }
+}
