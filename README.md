@@ -20,9 +20,9 @@ npm install -g create-webpack-application
 create-webpack-application my-app
 cd my-app
 ```
-### News
+### :tada: News
 
-:tada: Add `react`, `react-ts`, `vue` Integration. Usage:
+Add `react`, `react-ts`, `vue` Integration. Usage:
 ```bash
 create-webapck-application my-react-app --target react
 ```
