@@ -34,11 +34,11 @@ function default_1(name, cmd) {
     mkdir(root);
     process.chdir(root);
     copyDir(templateDir, root);
-    setPackageName(appName, templateDir, root);
+    copyPackage(appName, templateDir, root);
     installPackages(name, dependencies);
 }
 exports.default = default_1;
-function installPackages(name, dependency) {
+var installPackages = function (name, dependency) {
     var command = 'npm';
     var args = [
         'install',
@@ -52,13 +52,13 @@ function installPackages(name, dependency) {
     console.log('Installing packages for your application');
     var child = child_process_1.spawn(command, args, config);
     child.on('close', function () {
-        console.log();
+        console.log('');
         console.log("Project " + chalk_1.default.green(name) + " created!");
         console.log("use: cd " + chalk_1.default.green(name) + " and " + chalk_1.default.green('npm start'));
-        console.log("Then open browser view in then " + chalk_1.default.cyan('http://localhost:8080/'));
+        console.log('');
     });
-}
-function validationAppName(appName) {
+};
+var validationAppName = function (appName) {
     var validateProjectName = require('validate-npm-package-name');
     var results = validateProjectName(appName);
     var dependency = ['webpack', 'webpack-dev-server'];
@@ -75,7 +75,14 @@ function validationAppName(appName) {
         console.error('Please change the name of the application, a dependency has the same name.');
         process.exit(1);
     }
-}
+};
+var copyPackage = function (name, templateDir, root) {
+    var templatepackage = path_1.join(templateDir, 'package.json');
+    var packageJson = JSON.parse(fs_1.readFileSync(templatepackage, 'utf-8'));
+    packageJson.name = name;
+    fs_1.writeFileSync(path_1.join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
+    child_process_1.spawn("npm", ['install']);
+};
 var mkdir = function (dir) {
     try {
         fs_1.mkdirSync(dir, 493);
@@ -83,13 +90,7 @@ var mkdir = function (dir) {
     catch (e) {
     }
 };
-var setPackageName = function (name, templateDir, root) {
-    var templatepackage = path_1.join(templateDir, 'package.json');
-    var packageJson = JSON.parse(fs_1.readFileSync(templatepackage, 'utf-8'));
-    packageJson.name = name;
-    fs_1.writeFileSync(path_1.join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
-};
-function copyDir(src, dest) {
+var copyDir = function (src, dest) {
     mkdir(dest);
     var files = fs_1.readdirSync(src);
     for (var i = 0; i < files.length; i++) {
@@ -101,4 +102,4 @@ function copyDir(src, dest) {
             fs_1.copyFileSync(path_1.join(src, files[i]), path_1.join(dest, files[i]));
         }
     }
-}
+};

@@ -35,11 +35,11 @@ export default function(name: string, cmd: any): void {
     mkdir(root);
     process.chdir(root);
     copyDir(templateDir, root);
-    setPackageName(appName, templateDir, root);
+    copyPackage(appName, templateDir, root);
     installPackages(name, dependencies);
 }
 
-function installPackages(name:string, dependency: string[]): void {
+const installPackages = (name:string, dependency: string[]): void => {
     let command: string = 'npm';
     let args: string[] = [
         'install',
@@ -55,14 +55,14 @@ function installPackages(name:string, dependency: string[]): void {
     console.log('Installing packages for your application');
     const child = spawn(command, args, config);
     child.on('close', () => {
-        console.log();
+        console.log('');
         console.log(`Project ${chalk.green(name)} created!`);
         console.log(`use: cd ${chalk.green(name)} and ${chalk.green('npm start')}`);
-        console.log(`Then open browser view in then ${chalk.cyan('http://localhost:8080/')}`);
+        console.log('');
     });
 }
 
-function validationAppName(appName: string): void {
+const validationAppName = (appName: string): void => {
     const validateProjectName = require( 'validate-npm-package-name');
     let results = validateProjectName(appName);
     let dependency = ['webpack', 'webpack-dev-server'];
@@ -81,21 +81,22 @@ function validationAppName(appName: string): void {
     }
 }
 
-var mkdir = function(dir) {
+const copyPackage = (name, templateDir, root) => {
+    const templatepackage = join(templateDir, 'package.json');
+    let packageJson = JSON.parse(readFileSync(templatepackage, 'utf-8'));
+    packageJson.name = name;
+    writeFileSync(join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
+    spawn("npm", ['install']);
+}
+
+const mkdir = (dir) => {
 	try {
 		mkdirSync(dir, 0o755);
 	} catch(e) {
 	}
 };
 
-var setPackageName = (name, templateDir, root)=>{
-    const templatepackage = join(templateDir, 'package.json');
-    let packageJson = JSON.parse(readFileSync(templatepackage, 'utf-8'));
-    packageJson.name = name;
-    writeFileSync(join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
-}
-
-function copyDir(src, dest) {
+const copyDir = (src, dest) => {
     mkdir(dest);
 	var files = readdirSync(src);
 	for(var i = 0; i < files.length; i++) {
