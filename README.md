@@ -20,6 +20,12 @@ npm install -g create-webpack-application
 create-webpack-application my-app
 cd my-app
 ```
+### News
+
+:tada: Add `react`, `react-ts`, `vue` Integration. Usage:
+```bash
+create-webapck-application my-react-app --target react
+```
 
 Create a directory called my-app with the initial structure of the project.
 
@@ -41,7 +47,7 @@ my-app
 ```bash
 npm start
 ```
-Then open http://localhost:3000/ to see your app.
+Then open http://localhost:8080/ to see your app.
 
 ```bash
 npm build
