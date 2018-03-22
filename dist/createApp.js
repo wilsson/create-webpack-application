@@ -13,21 +13,21 @@ function default_1(name, cmd) {
     validationAppName(appName);
     switch (cmd.target) {
         case 'react':
-            templateDir = path_1.join(__dirname, '/../templates/webpack-react');
+            templateDir = path_1.join(__dirname, '/../src/templates/webpack-react');
             dependencies = ['babel-loader', 'babel-core', 'babel-preset-env', 'babel-preset-react', 'webpack', 'webpack-cli', 'webpack-dev-server'];
             break;
         case 'react-ts':
-            templateDir = path_1.join(__dirname, '/../templates/webpack-react-ts');
+            templateDir = path_1.join(__dirname, '/../src/templates/webpack-react-ts');
             console.log('react typescript in progress');
             process.exit();
             break;
         case 'vue':
-            templateDir = path_1.join(__dirname, '/../templates/webpack-vue');
+            templateDir = path_1.join(__dirname, '/../src/templates/webpack-vue');
             console.log('vue in progress');
             process.exit();
             break;
         default:
-            templateDir = path_1.join(__dirname, '/../templates/webpack-alone');
+            templateDir = path_1.join(__dirname, '/../src/templates/webpack-alone');
             dependencies = ['webpack', 'webpack-cli', 'webpack-dev-server'];
             break;
     }

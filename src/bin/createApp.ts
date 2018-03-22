@@ -13,21 +13,21 @@ export default function(name: string, cmd: any): void {
 
     switch(cmd.target) {
         case 'react':
-            templateDir = join(__dirname, '/../templates/webpack-react');
+            templateDir = join(__dirname, '/../src/templates/webpack-react');
             dependencies = ['babel-loader', 'babel-core', 'babel-preset-env', 'babel-preset-react', 'webpack', 'webpack-cli', 'webpack-dev-server'];
         break;
         case 'react-ts':
-            templateDir = join(__dirname, '/../templates/webpack-react-ts');
+            templateDir = join(__dirname, '/../src/templates/webpack-react-ts');
             console.log('react typescript in progress');
             process.exit();
         break;
         case 'vue':
-            templateDir = join(__dirname, '/../templates/webpack-vue');
+            templateDir = join(__dirname, '/../src/templates/webpack-vue');
             console.log('vue in progress');
             process.exit();
         break;
         default:
-            templateDir = join(__dirname, '/../templates/webpack-alone');
+            templateDir = join(__dirname, '/../src/templates/webpack-alone');
             dependencies = ['webpack', 'webpack-cli', 'webpack-dev-server'];
         break;
     }

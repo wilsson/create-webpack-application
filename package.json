@@ -1,6 +1,6 @@
 {
   "name": "create-webpack-application",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Easily create a basic webpack application",
   "bin": {
     "create-webpack-application": "./dist/index.js"
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/wilsson/create-webpack-application.git"
   },
-  "author": "wilsson <wilsonft83@gmail.com>",
+  "author": "wilsson <wilsonft83@gmail.com>, Juan Pablo <juanpablocs21@gmail.com>",
   "license": "MIT",
   "keywords": [
     "webpack",
