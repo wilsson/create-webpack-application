@@ -4,33 +4,13 @@ var path_1 = require("path");
 var fs_1 = require("fs");
 var child_process_1 = require("child_process");
 var chalk_1 = require("chalk");
-function default_1(name, cmd) {
-    var program = this;
+var configTargets_1 = require("./configTargets");
+function default_1(name, _a) {
+    var target = _a.target;
     var root = path_1.resolve(name);
     var appName = path_1.basename(root);
-    var templateDir = null;
-    var dependencies = [];
     validationAppName(appName);
-    switch (cmd.target) {
-        case 'react':
-            templateDir = path_1.join(__dirname, '/../src/templates/webpack-react');
-            dependencies = ['babel-loader', 'babel-core', 'babel-preset-env', 'babel-preset-react', 'webpack', 'webpack-cli', 'webpack-dev-server'];
-            break;
-        case 'react-ts':
-            templateDir = path_1.join(__dirname, '/../src/templates/webpack-react-ts');
-            console.log('react typescript in progress');
-            process.exit();
-            break;
-        case 'vue':
-            templateDir = path_1.join(__dirname, '/../src/templates/webpack-vue');
-            console.log('vue in progress');
-            process.exit();
-            break;
-        default:
-            templateDir = path_1.join(__dirname, '/../src/templates/webpack-alone');
-            dependencies = ['webpack', 'webpack-cli', 'webpack-dev-server'];
-            break;
-    }
+    var _b = configTargets_1.configTargets[target], templateDir = _b.templateDir, dependencies = _b.dependencies;
     mkdir(root);
     process.chdir(root);
     copyDir(templateDir, root);
@@ -81,7 +61,6 @@ var copyPackage = function (name, templateDir, root) {
     var packageJson = JSON.parse(fs_1.readFileSync(templatepackage, 'utf-8'));
     packageJson.name = name;
     fs_1.writeFileSync(path_1.join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
-    child_process_1.spawn("npm", ['install']);
 };
 var mkdir = function (dir) {
     try {

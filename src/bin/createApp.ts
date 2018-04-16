@@ -2,36 +2,13 @@ import { resolve, basename, join } from 'path';
 import { readdirSync, lstatSync, copyFileSync, mkdirSync, writeFileSync, readFileSync } from 'fs';
 import { spawn } from 'child_process';
 import chalk from 'chalk';
+import { configTargets } from './configTargets';
 
-export default function(name: string, cmd: any): void {
-    const program   = this;
+export default function(name: string, { target } ): void {
     const root      = resolve(name);
     const appName   = basename(root);
-    let templateDir = null;
-    let dependencies= [];
     validationAppName(appName);
-
-    switch(cmd.target) {
-        case 'react':
-            templateDir = join(__dirname, '/../src/templates/webpack-react');
-            dependencies = ['babel-loader', 'babel-core', 'babel-preset-env', 'babel-preset-react', 'webpack', 'webpack-cli', 'webpack-dev-server'];
-        break;
-        case 'react-ts':
-            templateDir = join(__dirname, '/../src/templates/webpack-react-ts');
-            console.log('react typescript in progress');
-            process.exit();
-        break;
-        case 'vue':
-            templateDir = join(__dirname, '/../src/templates/webpack-vue');
-            console.log('vue in progress');
-            process.exit();
-        break;
-        default:
-            templateDir = join(__dirname, '/../src/templates/webpack-alone');
-            dependencies = ['webpack', 'webpack-cli', 'webpack-dev-server'];
-        break;
-    }
-
+    let { templateDir, dependencies } = configTargets[target];
     mkdir(root);
     process.chdir(root);
     copyDir(templateDir, root);
@@ -86,7 +63,6 @@ const copyPackage = (name, templateDir, root) => {
     let packageJson = JSON.parse(readFileSync(templatepackage, 'utf-8'));
     packageJson.name = name;
     writeFileSync(join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
-    spawn("npm", ['install']);
 }
 
 const mkdir = (dir) => {

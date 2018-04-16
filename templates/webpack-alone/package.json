@@ -1,8 +1,8 @@
 {
-    "name": "urb",
+    "name": "cwa",
     "version": "0.1.0",
     "scripts":{
-        "start": "webpack-dev-server",
+        "start": "webpack-dev-server --mode development --open",
         "build": "webpack --mode development"
     }
 }
