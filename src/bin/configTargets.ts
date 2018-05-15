@@ -3,7 +3,8 @@ import { join } from 'path';
 const commonDependencies = [
     'webpack',
     'webpack-cli',
-    'webpack-dev-server'
+    'webpack-dev-server',
+    'html-webpack-plugin'
 ]
 
 export const configTargets = {

@@ -4,7 +4,8 @@ var path_1 = require("path");
 var commonDependencies = [
     'webpack',
     'webpack-cli',
-    'webpack-dev-server'
+    'webpack-dev-server',
+    'html-webpack-plugin'
 ];
 exports.configTargets = {
     react: {

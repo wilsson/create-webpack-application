@@ -66,21 +66,21 @@ const copyPackage = (name, templateDir, root) => {
 }
 
 const mkdir = (dir) => {
-	try {
-		mkdirSync(dir, 0o755);
-	} catch(e) {
-	}
+    try {
+        mkdirSync(dir, 0o755);
+    } catch(e) {
+    }
 };
 
 const copyDir = (src, dest) => {
     mkdir(dest);
-	var files = readdirSync(src);
-	for(var i = 0; i < files.length; i++) {
-		var current = lstatSync(join(src, files[i]));
-		if(current.isDirectory()) {
-			copyDir(join(src, files[i]), join(dest, files[i]));
-		} else {
-			copyFileSync(join(src, files[i]), join(dest, files[i]));
-		}
-	}
+    var files = readdirSync(src);
+    for(var i = 0; i < files.length; i++) {
+        var current = lstatSync(join(src, files[i]));
+        if(current.isDirectory()) {
+            copyDir(join(src, files[i]), join(dest, files[i]));
+        } else {
+            copyFileSync(join(src, files[i]), join(dest, files[i]));
+        }
+    }
 }

@@ -10,8 +10,8 @@ var program = new commander_1.Command(paquete.name);
 program
     .version(paquete.version, '-v, --version')
     .arguments('<project-directory>')
-    .option('-t, --target <target>', 'Target optional: react, react-ts, vue. For default webpack only', /^(react|react-ts)$/i, 'only')
-    .usage("" + chalk_1.default.green('<project-directory>'))
+    .option('-t, --target <target>', 'Target optional: react, react-ts. For default webpack only', /^(react|react-ts)$/i, 'only')
+    .usage(chalk_1.default.green('<project-directory>') + " " + chalk_1.default.magenta('-t') + " " + chalk_1.default.green('<target:react|react-ts>'))
     .action(createApp_1.default.bind(program))
     .parse(process.argv);
 if (!program.args[1])

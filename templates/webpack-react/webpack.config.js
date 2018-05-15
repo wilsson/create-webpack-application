@@ -1,5 +1,6 @@
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/entry.js',
@@ -25,9 +26,7 @@ module.exports = {
           }
         ]
     },
-    devServer: {
-        contentBase: path.resolve(__dirname, 'public'),
-        publicPath: "/dist/",
-        watchContentBase: true
-    }
+    plugins: [
+        new HtmlWebpackPlugin()
+    ]
 }

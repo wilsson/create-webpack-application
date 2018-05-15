@@ -11,9 +11,7 @@ module.exports = {
         extensions: ['.js'],
     },
     devtool: 'source-map',
-    devServer: {
-        contentBase: path.resolve(__dirname, 'public'),
-        publicPath: "/dist/",
-        watchContentBase: true
-    }
+    plugins: [
+        new HtmlWebpackPlugin()
+    ]
 }
