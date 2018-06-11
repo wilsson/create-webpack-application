@@ -16,16 +16,7 @@ npm install -g create-webpack-application
 
 ### Create app
 
-```bash
-create-webpack-application my-app
-cd my-app
-```
-### News :tada:
-
-Add `react`, `react-ts`, `vue` Integration. Usage:
-```bash
-create-webapck-application my-react-app --target react
-```
+![Alt text](/public/create-app "create-app")
 
 Create a directory called my-app with the initial structure of the project.
 
