@@ -1,6 +1,6 @@
 {
   "name": "create-webpack-application",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Easily create a basic webpack application",
   "bin": {
     "create-webpack-application": "./dist/index.js"
@@ -22,6 +22,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
+    "inquirer": "^6.0.0",
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {

@@ -9,4 +9,4 @@ function errorApp(name) {
     console.log("  " + chalk_1.default.cyan(name) + " " + chalk_1.default.green('my-webpack-app'));
     process.exit(1);
 }
-exports.default = errorApp;
+exports.errorApp = errorApp;

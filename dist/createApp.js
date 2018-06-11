@@ -5,8 +5,12 @@ var fs_1 = require("fs");
 var child_process_1 = require("child_process");
 var chalk_1 = require("chalk");
 var configTargets_1 = require("./configTargets");
-function default_1(name, _a) {
-    var target = _a.target;
+var errorApp_1 = require("./errorApp");
+function createApp(_a) {
+    var name = _a.name, target = _a.target;
+    if (!name) {
+        errorApp_1.errorApp(name);
+    }
     var root = path_1.resolve(name);
     var appName = path_1.basename(root);
     validationAppName(appName);
@@ -17,7 +21,7 @@ function default_1(name, _a) {
     copyPackage(appName, templateDir, root);
     installPackages(name, dependencies);
 }
-exports.default = default_1;
+exports.createApp = createApp;
 var installPackages = function (name, dependency) {
     var command = 'npm';
     var args = [

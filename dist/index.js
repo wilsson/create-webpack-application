@@ -1,18 +1,37 @@
 #!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var commander_1 = require("commander");
-var chalk_1 = require("chalk");
+var inquirer = require("inquirer");
+var configTargets_1 = require("./configTargets");
 var createApp_1 = require("./createApp");
-var errorApp_1 = require("./errorApp");
-var paquete = require('../package.json');
-var program = new commander_1.Command(paquete.name);
-program
-    .version(paquete.version, '-v, --version')
-    .arguments('<project-directory>')
-    .option('-t, --target <target>', 'Target optional: react, react-ts. For default webpack only', /^(react|react-ts)$/i, 'only')
-    .usage(chalk_1.default.green('<project-directory>') + " " + chalk_1.default.magenta('-t') + " " + chalk_1.default.green('<target:react|react-ts>'))
-    .action(createApp_1.default.bind(program))
-    .parse(process.argv);
-if (!program.args[1])
-    errorApp_1.default(program.name());
+inquirer
+    .prompt([
+    {
+        type: 'list',
+        name: 'target',
+        message: 'What config webpack?',
+        choices: [
+            configTargets_1.configTargets['only'].message,
+            configTargets_1.configTargets['react'].message,
+            configTargets_1.configTargets['react-ts'].message
+        ]
+    },
+    {
+        type: 'input',
+        name: 'name',
+        message: 'Name you project'
+    }
+])
+    .then(function (response) {
+    if (configTargets_1.configTargets['only'].message === response['target']) {
+        response['target'] = 'only';
+    }
+    if (configTargets_1.configTargets['react'].message === response['target']) {
+        response['target'] = 'react';
+    }
+    if (configTargets_1.configTargets['react-ts'].message === response['target']) {
+        response['target'] = 'react-ts';
+    }
+    console.log(response);
+    createApp_1.createApp(response);
+});

@@ -9,6 +9,7 @@ var commonDependencies = [
 ];
 exports.configTargets = {
     react: {
+        message: 'React + Babel + Webpack',
         templateDir: path_1.join(__dirname, '../templates/webpack-react'),
         dependencies: [
             'react',
@@ -20,6 +21,7 @@ exports.configTargets = {
         ].concat(commonDependencies)
     },
     'react-ts': {
+        message: 'React + Typescript + Webpack',
         templateDir: path_1.join(__dirname, '/../templates/webpack-react-ts'),
         dependencies: [
             'react',
@@ -31,6 +33,7 @@ exports.configTargets = {
         ].concat(commonDependencies)
     },
     only: {
+        message: 'Only Webpack',
         templateDir: path_1.join(__dirname, '/../templates/webpack-alone'),
         dependencies: commonDependencies.slice()
     }

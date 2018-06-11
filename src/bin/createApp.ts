@@ -3,8 +3,12 @@ import { readdirSync, lstatSync, copyFileSync, mkdirSync, writeFileSync, readFil
 import { spawn } from 'child_process';
 import chalk from 'chalk';
 import { configTargets } from './configTargets';
+import { errorApp } from './errorApp';
 
-export default function(name: string, { target } ): void {
+export function createApp({ name, target }): void {
+    if(!name) {
+        errorApp(name);
+    }
     const root      = resolve(name);
     const appName   = basename(root);
     validationAppName(appName);
