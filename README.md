@@ -16,7 +16,7 @@ npm install -g create-webpack-application
 
 ### Create app
 
-![Alt text](/public/create-app "create-app")
+![Alt text](/public/create-app.png)
 
 Create a directory called my-app with the initial structure of the project.
 
