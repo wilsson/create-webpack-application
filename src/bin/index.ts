@@ -3,17 +3,17 @@
 import * as inquirer from 'inquirer';
 import { configTargets } from './configTargets';
 import { createApp } from './createApp';
+var configKeys = Object.keys(configTargets);
+
 inquirer
     .prompt([
         {
             type: 'list',
             name: 'target',
             message: 'What config webpack?',
-            choices: [
-                configTargets['only'].message,
-                configTargets['react'].message,
-                configTargets['react-ts'].message
-            ]
+            choices: configKeys.map(function(key) {
+                return configTargets[key].message 
+            })
         },
         {
             type: 'input',
@@ -22,15 +22,13 @@ inquirer
         }
     ])
     .then(response => {
-        if(configTargets['only'].message === response['target']) {
-            response['target'] = 'only';
+        for (var i = 0; i < configKeys.length; ++i) {
+            if (configTargets[configKeys[i]].message === response['target']) {
+                response['target'] = configKeys[i];
+                break;
+            }
         }
-        if(configTargets['react'].message === response['target']) {
-            response['target'] = 'react';
-        }
-        if(configTargets['react-ts'].message === response['target']) {
-            response['target'] = 'react-ts';
-        }
+        
         console.log(response);
         createApp(response);
     });

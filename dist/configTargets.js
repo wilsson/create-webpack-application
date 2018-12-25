@@ -36,5 +36,14 @@ exports.configTargets = {
         message: 'Only Webpack',
         templateDir: path_1.join(__dirname, '/../templates/webpack-alone'),
         dependencies: commonDependencies.slice()
+    },
+    babel: {
+        message: 'Webpack + Babel7',
+        templateDir: path_1.join(__dirname, '/../templates/webpack-babel'),
+        dependencies: [
+            'babel-loader',
+            '@babel/core',
+            '@babel/preset-env'
+        ].concat(commonDependencies)
     }
 };
