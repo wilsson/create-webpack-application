@@ -40,5 +40,15 @@ export const configTargets = {
         dependencies: [
             ...commonDependencies
         ]
+    },
+    babel: {
+        message: 'Webpack + Babel7',
+        templateDir: join(__dirname, '/../templates/webpack-babel'),
+        dependencies: [
+            'babel-loader',
+            '@babel/core',
+            '@babel/preset-env',
+            ...commonDependencies
+        ]
     }
 }
