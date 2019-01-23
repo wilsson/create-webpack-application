@@ -3,6 +3,6 @@
     "version": "0.1.0",
     "scripts":{
         "start": "webpack-dev-server --mode development --open",
-        "build": "webpack --mode development"
+        "build": "webpack --mode production"
     }
 }
