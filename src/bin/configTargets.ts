@@ -15,9 +15,9 @@ export const configTargets = {
             'react',
             'react-dom',
             'babel-loader',
-            'babel-core',
-            'babel-preset-env',
-            'babel-preset-react',
+            '@babel/core',
+            '@babel/preset-env',
+            '@babel/preset-react',
             ...commonDependencies
         ]
     },
