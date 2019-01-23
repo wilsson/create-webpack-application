@@ -11,9 +11,7 @@ inquirer
         type: 'list',
         name: 'target',
         message: 'What config webpack?',
-        choices: configKeys.map(function (key) {
-            return configTargets_1.configTargets[key].message;
-        })
+        choices: configKeys.map(function (key) { return configTargets_1.configTargets[key].message; })
     },
     {
         type: 'input',
@@ -28,6 +26,5 @@ inquirer
             break;
         }
     }
-    console.log(response);
     createApp_1.createApp(response);
 });

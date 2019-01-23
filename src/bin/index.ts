@@ -3,7 +3,8 @@
 import * as inquirer from 'inquirer';
 import { configTargets } from './configTargets';
 import { createApp } from './createApp';
-var configKeys = Object.keys(configTargets);
+
+const configKeys = Object.keys(configTargets);
 
 inquirer
     .prompt([
@@ -11,9 +12,7 @@ inquirer
             type: 'list',
             name: 'target',
             message: 'What config webpack?',
-            choices: configKeys.map(function(key) {
-                return configTargets[key].message 
-            })
+            choices: configKeys.map(key => configTargets[key].message)
         },
         {
             type: 'input',
@@ -28,7 +27,5 @@ inquirer
                 break;
             }
         }
-        
-        console.log(response);
         createApp(response);
     });
