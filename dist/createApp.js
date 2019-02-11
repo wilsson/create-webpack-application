@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = require("path");
+var fs_extra_1 = require("fs-extra");
 var fs_1 = require("fs");
 var child_process_1 = require("child_process");
 var chalk_1 = require("chalk");
 var configTargets_1 = require("./configTargets");
 var errorApp_1 = require("./errorApp");
-function createApp(_a) {
+exports.createApp = function (_a) {
     var name = _a.name, target = _a.target;
     if (!name) {
         errorApp_1.errorApp(name);
@@ -15,13 +16,12 @@ function createApp(_a) {
     var appName = path_1.basename(root);
     validationAppName(appName);
     var _b = configTargets_1.configTargets[target], templateDir = _b.templateDir, dependencies = _b.dependencies;
-    mkdir(root);
+    fs_extra_1.ensureDirSync(root);
     process.chdir(root);
-    copyDir(templateDir, root);
+    fs_extra_1.copySync(templateDir, root);
     copyPackage(appName, templateDir, root);
     installPackages(name, dependencies);
-}
-exports.createApp = createApp;
+};
 var installPackages = function (name, dependency) {
     var command = 'npm';
     var args = [
@@ -65,24 +65,4 @@ var copyPackage = function (name, templateDir, root) {
     var packageJson = JSON.parse(fs_1.readFileSync(templatepackage, 'utf-8'));
     packageJson.name = name;
     fs_1.writeFileSync(path_1.join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
-};
-var mkdir = function (dir) {
-    try {
-        fs_1.mkdirSync(dir, 493);
-    }
-    catch (e) {
-    }
-};
-var copyDir = function (src, dest) {
-    mkdir(dest);
-    var files = fs_1.readdirSync(src);
-    for (var i = 0; i < files.length; i++) {
-        var current = fs_1.lstatSync(path_1.join(src, files[i]));
-        if (current.isDirectory()) {
-            copyDir(path_1.join(src, files[i]), path_1.join(dest, files[i]));
-        }
-        else {
-            fs_1.copyFileSync(path_1.join(src, files[i]), path_1.join(dest, files[i]));
-        }
-    }
 };

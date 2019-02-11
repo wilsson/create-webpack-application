@@ -1,10 +1,10 @@
 {
   "name": "create-webpack-application",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Easily create a basic webpack application",
   "bin": {
     "create-webpack-application": "./dist/index.js",
-    "cwa" : "./dist/index.js"
+    "cwa": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc"
@@ -23,6 +23,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
+    "fs-extra": "7.0.1",
     "inquirer": "^6.0.0",
     "validate-npm-package-name": "^3.0.0"
   },

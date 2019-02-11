@@ -1,11 +1,12 @@
 import { resolve, basename, join } from 'path';
-import { readdirSync, lstatSync, copyFileSync, mkdirSync, writeFileSync, readFileSync } from 'fs';
+import { copySync, ensureDirSync } from 'fs-extra';
+import { writeFileSync, readFileSync } from 'fs';
 import { spawn } from 'child_process';
 import chalk from 'chalk';
 import { configTargets } from './configTargets';
 import { errorApp } from './errorApp';
 
-export function createApp({ name, target }): void {
+export const createApp = ({ name, target }): void => {
     if(!name) {
         errorApp(name);
     }
@@ -13,9 +14,9 @@ export function createApp({ name, target }): void {
     const appName   = basename(root);
     validationAppName(appName);
     let { templateDir, dependencies } = configTargets[target];
-    mkdir(root);
+    ensureDirSync(root);
     process.chdir(root);
-    copyDir(templateDir, root);
+    copySync(templateDir, root)
     copyPackage(appName, templateDir, root);
     installPackages(name, dependencies);
 }
@@ -62,29 +63,9 @@ const validationAppName = (appName: string): void => {
     }
 }
 
-const copyPackage = (name, templateDir, root) => {
+const copyPackage = (name: string, templateDir: string, root: string): void => {
     const templatepackage = join(templateDir, 'package.json');
     let packageJson = JSON.parse(readFileSync(templatepackage, 'utf-8'));
     packageJson.name = name;
     writeFileSync(join(root, 'package.json'), JSON.stringify(packageJson, null, 2));
-}
-
-const mkdir = (dir) => {
-    try {
-        mkdirSync(dir, 0o755);
-    } catch(e) {
-    }
-};
-
-const copyDir = (src, dest) => {
-    mkdir(dest);
-    var files = readdirSync(src);
-    for(var i = 0; i < files.length; i++) {
-        var current = lstatSync(join(src, files[i]));
-        if(current.isDirectory()) {
-            copyDir(join(src, files[i]), join(dest, files[i]));
-        } else {
-            copyFileSync(join(src, files[i]), join(dest, files[i]));
-        }
-    }
 }
