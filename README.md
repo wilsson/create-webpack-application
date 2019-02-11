@@ -8,13 +8,26 @@
 
 ### Installation
 
-Install globall.y
+Install globally
 
 ```bash
 npm install -g create-webpack-application
 ```
 
-### Create app
+### Usage
+
+
+```bash
+create-webpack-application
+```
+
+or
+
+```bash
+cwa
+```
+
+and select scaffold.
 
 ![Alt text](/public/create-app.png)
 
