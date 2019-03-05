@@ -1,4 +1,7 @@
+/dist
 /node_modules
 /test
 /yarn-error.log
 /.Ds_Store
+yarn.lock
+package-lock.json

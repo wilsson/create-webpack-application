@@ -5,7 +5,7 @@ const commonDependencies = [
     'webpack-cli',
     'webpack-dev-server',
     'html-webpack-plugin'
-]
+];
 
 export const configTargets = {
     react: {
@@ -23,7 +23,7 @@ export const configTargets = {
     },
     'react-ts': {
         message: 'React + Typescript + Webpack',
-        templateDir: join(__dirname, '/../templates/webpack-react-ts'),
+        templateDir: join(__dirname, '../templates/webpack-react-ts'),
         dependencies: [
             'react',
             'react-dom',
@@ -36,14 +36,14 @@ export const configTargets = {
     },
     only: {
         message: 'Only Webpack',
-        templateDir: join(__dirname, '/../templates/webpack-alone'),
+        templateDir: join(__dirname, '../templates/webpack-alone'),
         dependencies: [
             ...commonDependencies
         ]
     },
     babel: {
         message: 'Webpack + Babel7',
-        templateDir: join(__dirname, '/../templates/webpack-babel'),
+        templateDir: join(__dirname, '../templates/webpack-babel'),
         dependencies: [
             'babel-loader',
             '@babel/core',
@@ -51,4 +51,4 @@ export const configTargets = {
             ...commonDependencies
         ]
     }
-}
+};

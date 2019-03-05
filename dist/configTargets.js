@@ -22,7 +22,7 @@ exports.configTargets = {
     },
     'react-ts': {
         message: 'React + Typescript + Webpack',
-        templateDir: path_1.join(__dirname, '/../templates/webpack-react-ts'),
+        templateDir: path_1.join(__dirname, '../templates/webpack-react-ts'),
         dependencies: [
             'react',
             'react-dom',
@@ -34,12 +34,12 @@ exports.configTargets = {
     },
     only: {
         message: 'Only Webpack',
-        templateDir: path_1.join(__dirname, '/../templates/webpack-alone'),
+        templateDir: path_1.join(__dirname, '../templates/webpack-alone'),
         dependencies: commonDependencies.slice()
     },
     babel: {
         message: 'Webpack + Babel7',
-        templateDir: path_1.join(__dirname, '/../templates/webpack-babel'),
+        templateDir: path_1.join(__dirname, '../templates/webpack-babel'),
         dependencies: [
             'babel-loader',
             '@babel/core',
