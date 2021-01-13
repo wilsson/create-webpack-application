@@ -11,13 +11,13 @@ inquirer
         {
             type: 'list',
             name: 'target',
-            message: 'What config webpack?',
+            message: 'Which Webpack configuration?',
             choices: configKeys.map(key => configTargets[key].message)
         },
         {
             type: 'input',
             name: 'name',
-            message: 'Name you project'
+            message: 'Name your project'
         }
     ])
     .then(response => {
