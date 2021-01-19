@@ -10,13 +10,13 @@ inquirer
     {
         type: 'list',
         name: 'target',
-        message: 'What config webpack?',
+        message: 'Which Webpack configuration?',
         choices: configKeys.map(function (key) { return configTargets_1.configTargets[key].message; })
     },
     {
         type: 'input',
         name: 'name',
-        message: 'Name you project'
+        message: 'Name your project'
     }
 ])
     .then(function (response) {
