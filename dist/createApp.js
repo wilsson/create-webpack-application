@@ -7,6 +7,15 @@ var child_process_1 = require("child_process");
 var chalk_1 = require("chalk");
 var configTargets_1 = require("./configTargets");
 var errorApp_1 = require("./errorApp");
+var hasYarn = function () {
+    try {
+        child_process_1.execSync('yarnpkg --version', { stdio: 'ignore' });
+        return true;
+    }
+    catch (e) {
+        return false;
+    }
+};
 exports.createApp = function (_a) {
     var name = _a.name, target = _a.target;
     if (!name) {
@@ -24,21 +33,21 @@ exports.createApp = function (_a) {
 };
 var installPackages = function (name, dependency) {
     var command = 'npm';
-    var args = [
-        'install',
-        '--save-dev'
-    ].concat(dependency);
+    var useYarn = hasYarn();
+    if (useYarn) {
+        command = 'yarn';
+    }
     var config = {
         stdio: 'inherit',
         shell: true
     };
     console.log('');
     console.log('Installing packages for your application');
-    var child = child_process_1.spawn(command, args, config);
+    var child = child_process_1.spawn(command, ['install'], config);
     child.on('close', function () {
         console.log('');
         console.log("Project " + chalk_1.default.green(name) + " created!");
-        console.log("use: cd " + chalk_1.default.green(name) + " and " + chalk_1.default.green('npm start'));
+        console.log("use: cd " + chalk_1.default.green(name) + " and " + (useYarn ? chalk_1.default.green('yarn dev') : chalk_1.default.green('npm run dev')));
         console.log('');
     });
 };
@@ -49,15 +58,18 @@ var validationAppName = function (appName) {
     if (!results.validForNewPackages) {
         console.error("Could not create project named: " + chalk_1.default.red(appName));
         console.log('please correct:');
-        results.errors.forEach(function (error) {
+        results.errors && results.errors.forEach(function (error) {
             console.log("    " + chalk_1.default.red('*') + " " + error);
         });
-        process.exit(1);
+        results.warnings && results.warnings.forEach(function (error) {
+            console.log("    " + chalk_1.default.red('*') + " " + error);
+        });
+        process.exit();
     }
     if (dependency.indexOf(appName) !== -1) {
         console.error("Could not create project named " + chalk_1.default.red(appName) + ".");
         console.error('Please change the name of the application, a dependency has the same name.');
-        process.exit(1);
+        process.exit();
     }
 };
 var copyPackage = function (name, templateDir, root) {
