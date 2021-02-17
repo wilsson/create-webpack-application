@@ -57,7 +57,7 @@ const installPackages = (name:string, dependency: string[]): void => {
 const validationAppName = (appName: string): void => {
     const validateProjectName = require( 'validate-npm-package-name');
     let results = validateProjectName(appName);
-    let dependency = ['webpack', 'webpack-dev-server'];
+    let dependency = ['webpack', 'webpack-cli', 'webpack-dev-server'];
 
     if(!results.validForNewPackages){
       console.error(`Could not create project named: ${chalk.red(appName)}`);

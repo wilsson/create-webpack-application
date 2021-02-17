@@ -1,8 +1,8 @@
 {
-    "name": "cwa",
-    "version": "0.1.0",
-    "scripts":{
-        "start": "webpack-dev-server --mode development --open",
-        "build": "webpack --mode production"
-    }
+  "name": "cwa",
+  "version": "0.1.0",
+  "scripts":{
+    "start": "webpack-cli serve --mode development --open",
+    "build": "webpack --mode production"
+  }
 }
