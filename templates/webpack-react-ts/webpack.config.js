@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-    resolve: {
+  resolve: {
     extensions: ['.js', '.ts', '.tsx'],
   },
   devtool: 'source-map',
