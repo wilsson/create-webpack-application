@@ -43,13 +43,18 @@ const installPackages = (name: string, dependency: string[]): void => {
     shell: true
   };
 
+  let args: string[] = [
+    useYarn ? 'add' : 'install',
+    ...dependency
+  ];
+
   console.log('');
   console.log('Installing packages for your application');
-  const child = spawn(command, ['install'], config as any);
+  const child = spawn(command, args, config as any);
   child.on('close', () => {
     console.log('');
     console.log(`Project ${chalk.green(name)} created!`);
-    console.log(`use: cd ${chalk.green(name)} and ${useYarn ? chalk.green('yarn dev') : chalk.green('npm run dev')}`);
+    console.log(`use: cd ${chalk.green(name)} and ${useYarn ? chalk.green('yarn start') : chalk.green('npm start')}`);
     console.log('');
   });
 }

@@ -41,9 +41,12 @@ var installPackages = function (name, dependency) {
         stdio: 'inherit',
         shell: true
     };
+    var args = [
+        useYarn ? 'add' : 'install'
+    ].concat(dependency);
     console.log('');
     console.log('Installing packages for your application');
-    var child = child_process_1.spawn(command, ['install'], config);
+    var child = child_process_1.spawn(command, args, config);
     child.on('close', function () {
         console.log('');
         console.log("Project " + chalk_1.default.green(name) + " created!");
