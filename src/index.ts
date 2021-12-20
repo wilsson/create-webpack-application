@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
 import * as inquirer from 'inquirer';
-import { configTargets } from './configTargets';
-import { createApp } from './createApp';
+import { App } from './app'
+import { ErrorApp } from './errorApp'
+import { PackageManager } from './packageManager'
+import { configTargets, ConfigTarget } from './configTargets';
 
-const configKeys = Object.keys(configTargets);
+interface ResponseCLI {
+  appName: string;
+  target: string;
+}
 
 inquirer
   .prompt([
@@ -12,20 +17,19 @@ inquirer
       type: 'list',
       name: 'target',
       message: 'Which Webpack configuration?',
-      choices: configKeys.map(key => configTargets[key].message)
+      choices: (configTargets as any).map(config => config.message)
     },
     {
       type: 'input',
-      name: 'name',
+      name: 'appName',
       message: 'Name your project'
     }
   ])
-  .then(response => {
-    for (var i = 0; i < configKeys.length; ++i) {
-      if (configTargets[configKeys[i]].message === response['target']) {
-        response['target'] = configKeys[i];
-        break;
-      }
-    }
-    createApp(response);
+  .then((response: ResponseCLI) => {
+    const { appName, target } = response
+    const targetSelected: ConfigTarget = (configTargets as any).find(config => config.message === target)
+    const packageManager = new PackageManager(appName)
+    const error = new ErrorApp(appName)
+    const app = new App(appName, targetSelected, packageManager, error)
+    app.create()
   });

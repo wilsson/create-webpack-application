@@ -1,5 +1,12 @@
 import { join } from 'path';
 
+export interface ConfigTarget {
+  target: string;
+  message: string;
+  templateDir: string;
+  dependencies: string[];
+}
+
 const commonDependencies = [
   'webpack',
   'webpack-cli',
@@ -7,8 +14,9 @@ const commonDependencies = [
   'html-webpack-plugin'
 ];
 
-export const configTargets = {
-  react: {
+export const configTargets: ConfigTarget[] = [
+  {
+    target: 'react',
     message: 'React + Babel + Webpack',
     templateDir: join(__dirname, '../templates/webpack-react'),
     dependencies: [
@@ -21,7 +29,8 @@ export const configTargets = {
       ...commonDependencies
     ]
   },
-  'react-ts': {
+  {
+    target: 'react-ts',
     message: 'React + Typescript + Webpack',
     templateDir: join(__dirname, '../templates/webpack-react-ts'),
     dependencies: [
@@ -34,14 +43,16 @@ export const configTargets = {
       ...commonDependencies
     ]
   },
-  only: {
+  {
+    target: 'only',
     message: 'Only Webpack',
     templateDir: join(__dirname, '../templates/webpack-alone'),
     dependencies: [
       ...commonDependencies
     ]
   },
-  babel: {
+  {
+    target: 'babel',
     message: 'Webpack + Babel7',
     templateDir: join(__dirname, '../templates/webpack-babel'),
     dependencies: [
@@ -51,4 +62,4 @@ export const configTargets = {
       ...commonDependencies
     ]
   }
-};
+];
